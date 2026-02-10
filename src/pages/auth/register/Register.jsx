@@ -7,6 +7,8 @@ import { registerSchema } from '../../../validation/RegisterSchema.js';
 import shoppingImg from '../../../assets/shopping.png';
 import Googleicon from '../../../assets/Icon-Google.svg';
 import { Link as RouterLink } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Register() {
 
@@ -20,6 +22,11 @@ export default function Register() {
         'https://knowledgeshop.runasp.net/api/auth/Account/Register',
         values
       );
+     toast.success("Active registration!", {
+      position: "top-right",
+      autoClose: 3000,
+      rtl: true,
+    });
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -41,8 +48,8 @@ export default function Register() {
         <Box
           component="img"
           src={shoppingImg}
-          alt="register"
-          width="70%"
+          alt="shoppingImg"
+          width="100%"
         />
       </Box>
 
