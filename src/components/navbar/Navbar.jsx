@@ -24,9 +24,9 @@ export default function Navbar() {
           <Link  component={RouterLink} to="/" color="inherit" underline='none'>Home</Link>
           <Link component={RouterLink} to="/login" color="inherit" underline='none'>Login</Link>
           <Link component={RouterLink} to="/register" color="inherit" underline='none'>Register</Link>
-            <IconButton color="inherit"  component={RouterLink} to="/cart">
+            <IconButton color="inherit"   component={RouterLink} to="/cart">
       <Badge  color="secondary">
-        <ShoppingCartIcon />
+        <ShoppingCartIcon  />
       </Badge>
     </IconButton>
             </Box>
