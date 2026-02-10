@@ -17,5 +17,4 @@ import * as yup from 'yup';
     
 
 
-    phoneNumber: yup.string().required('phone number is required'),
   });
