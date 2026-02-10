@@ -3,7 +3,7 @@ import { Box, Button, Link, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { registerSchema } from '../../../validation/registerSchema';
+import { registerSchema } from '../../../validation/registerSchema.js';
 import shoppingImg from '../../../assets/shopping.png';
 import Googleicon from '../../../assets/Icon-Google.svg';
 import { Link as RouterLink } from 'react-router-dom';
