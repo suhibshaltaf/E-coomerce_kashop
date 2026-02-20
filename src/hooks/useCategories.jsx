@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query';
-import axiosinstance from '../api/axiosinstance';
+import axiosinstance from '../api/axiosinstance.js';
 export default function useCategories() {
     const getCategories = async()=>{
     
