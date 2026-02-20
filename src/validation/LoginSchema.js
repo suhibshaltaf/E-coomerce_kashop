@@ -1,10 +1,6 @@
-import * as yup from 'yup';
+ import * as yup from 'yup';
 
-  export const registerSchema = yup.object({
-    userName: yup.string().required('user name is required')
-    .min(3, 'user name must be at least 3 characters')
-    .matches(/^[a-zA-Z0-9_-]+$/, "userName must contain only letters, numbers, underscores, and hyphens"),
-    fullName: yup.string().required('full name is required'),
+ export const loginSchema = yup.object({
     email: yup.string().email('email must  be a valid email').required('email is required'),
     password: yup.string()
     .required("password is required")
@@ -13,9 +9,4 @@ import * as yup from 'yup';
     .matches(/[a-z]/, "password must contain at least one lowercase letter")
     .matches(/\d/, "password must contain at least one number")
     .matches(/[@$!%*?&]/, "password must contain at least one special character"),
-    phoneNumber: yup.string().required('phone number is required'),
-    
-
-
   });
-

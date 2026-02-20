@@ -1,7 +1,11 @@
 import React from 'react'
+import Categories from '../../components/categories/categories'
 
 export default function Home() {
   return (
-    <div>Home</div>
+    <div>
+
+      <Categories />
+    </div>
   )
 }

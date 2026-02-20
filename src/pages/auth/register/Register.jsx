@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, Link, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Link, TextField, Typography } from '@mui/material';
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { registerSchema } from '../../../validation/RegisterSchema.js';
 import shoppingImg from '../../../assets/shopping.png';
@@ -9,11 +9,13 @@ import Googleicon from '../../../assets/Icon-Google.svg';
 import { Link as RouterLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { common } from '@mui/material/colors';
 
 export default function Register() {
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(registerSchema)
+  const[serverErrors, setServerErrors] =useState({});
+  const { register, handleSubmit, formState: { errors,isSubmitting } } = useForm({
+    resolver: yupResolver(registerSchema),mode : `onBlur`
   });
 
   const registerform = async (values) => {
@@ -27,9 +29,9 @@ export default function Register() {
       autoClose: 3000,
       rtl: true,
     });
-      console.log(response);
     } catch (error) {
-      console.log(error);
+      setServerErrors(error.response.data.errors);
+
     }
   };
 
@@ -58,9 +60,25 @@ export default function Register() {
       <Box
         flex={1}
         display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
+        flexDirection="column"
+        gap={2}
+      
+      >  <Typography variant="h4" >
+            Create an account
+          </Typography>
+
+          <Typography variant="body2" color="text.secondary" >
+            Enter your details below
+          </Typography>
+{serverErrors.length > 0 && (
+  <Box>
+    {serverErrors.map((err, index) => (
+      <Typography key={index} color="error" variant="body2">
+        {err}
+      </Typography>
+    ))}
+  </Box>
+)}
        <Box
   width="70%"
   component="form"
@@ -69,14 +87,7 @@ export default function Register() {
   gap={2} 
   onSubmit={handleSubmit(registerform)}
 >
-          <Typography variant="h4" >
-            Create an account
-          </Typography>
-
-          <Typography variant="body2" color="text.secondary" >
-            Enter your details below
-          </Typography>
-
+        
           <TextField
             {...register('userName')}
             fullWidth
@@ -125,18 +136,17 @@ export default function Register() {
 
           <Button
             variant="contained"
-            fullWidth
+            
             type="submit"
             style={{ backgroundColor: "#e04343" }}
-          >
-            Create Account
-          </Button>
+            disabled={isSubmitting}>{isSubmitting ? <CircularProgress size={20} color="inherit" /> : 'Create Account'}
+            </Button>
 
           <Button
             fullWidth
            
 
-            variant="outlined"
+            variant="outlined"  
 color='white'          >
               <Box
           component="img"
