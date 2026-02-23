@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const axiosinstance = axios.create({
-  baseURL: 'https://knowledgeshop.runasp.net/api',
+  baseURL: `${import.meta.env.VITE_API_URL}`,
     headers: {
         'Accept-Language': 'en'
       }

@@ -16,9 +16,10 @@ export default function Login() {
   const loginform = async (values) => {
     try {
       const response = await axios.post(
-        'https://knowledgeshop.runasp.net/api/auth/Account/Login',
-        values
-      );
+        'https://knowledgeshop.runasp.net/api/auth/Account/Login',values);
+      if (response.status === 200) {
+        localStorage.setItem('accessToken', response.data.accessToken); 
+      }
       toast.success("Effective login", {
       position: "top-right",
       autoClose: 3000,
