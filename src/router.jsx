@@ -4,12 +4,14 @@ import Home from "./pages/home/Home";
 import Cart from "./pages/cart/Cart";
 import Login from "./pages/auth/login/Login";
 import Register from "./pages/auth/register/Register";
+import UserContextProvider from "./context/Usercontext";
 
 const router= createBrowserRouter([
 
     {
         path:'/',
-        element:<MainLayout/>,
+        element:<UserContextProvider>
+                    <MainLayout/> </UserContextProvider>,
         children:[
             {
                 index:true,
@@ -17,7 +19,8 @@ const router= createBrowserRouter([
             },
             {
                 path:'/cart',
-                element:<Cart/>
+                element:
+                    <Cart/>
             },
             {
                 path:'/login',
