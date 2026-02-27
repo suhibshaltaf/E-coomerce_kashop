@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, CircularProgress, Link, TextField, Typography } from '@mui/material';
+import { Box, Button, Link, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -8,6 +8,7 @@ import shoppingImg from '../../../assets/shopping.png';
 import { Link as RouterLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from '../../../ui/Loader/Loader.jsx';
 export default function Login() {
  const { register:login , handleSubmit,formState: { errors ,isSubmitting} } = useForm({
     resolver: yupResolver(loginSchema) , mode : `onBlur`
@@ -101,7 +102,7 @@ Log in to KASHOP
     variant="contained"
     type="submit"
     
-      disabled={isSubmitting}>{isSubmitting ? <CircularProgress size={20} color="primary" /> : ' Log in'}
+      disabled={isSubmitting}>{isSubmitting ? <Loader/> : ' Log in'}
 
   </Button>
 

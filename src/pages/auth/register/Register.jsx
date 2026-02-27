@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, CircularProgress, Link, TextField, Typography } from '@mui/material';
+import { Box, Button, Link, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -10,6 +10,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { common } from '@mui/material/colors';
+import Loader from '../../../ui/Loader/Loader.jsx';
 
 export default function Register() {
 
@@ -139,7 +140,7 @@ export default function Register() {
             
             type="submit"
             style={{ backgroundColor: "#e04343" }}
-            disabled={isSubmitting}>{isSubmitting ? <CircularProgress size={20} color="inherit" /> : 'Create Account'}
+            disabled={isSubmitting}>{isSubmitting ? <Loader size={20} color="inherit" /> : 'Create Account'}
             </Button>
 
           <Button
