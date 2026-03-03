@@ -5,11 +5,15 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { loginSchema } from '../../../validation/LoginSchema.js';
 import shoppingImg from '../../../assets/shopping.png';
-import { Link as RouterLink } from 'react-router-dom';
+import {  Link as RouterLink, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from '../../../ui/Loader/Loader.jsx';
+import useAuthStore from '../../../store/useAuthStore.js';
 export default function Login() {
+
+  const setToken = useAuthStore((state) => state.setToken);
+  const Navigate = useNavigate();
  const { register:login , handleSubmit,formState: { errors ,isSubmitting} } = useForm({
     resolver: yupResolver(loginSchema) , mode : `onBlur`
   });
@@ -19,7 +23,8 @@ export default function Login() {
       const response = await axios.post(
         'https://knowledgeshop.runasp.net/api/auth/Account/Login',values);
       if (response.status === 200) {
-        localStorage.setItem('accessToken', response.data.accessToken); 
+        setToken(response.data.accessToken);
+        Navigate('/'); 
       }
       toast.success("Effective login", {
       position: "top-right",
