@@ -4,7 +4,7 @@ import { create } from "zustand";
 
 const useAuthStore = create ((set)=>(
     {
-        token :localStorage.getItem("accessToken"),
+        token:localStorage.getItem("accessToken"),
         setToken:(newToken)=>{
             set({
                 token:newToken
@@ -13,7 +13,7 @@ const useAuthStore = create ((set)=>(
                 }
                 ,
                 logout:()=>{
-                    set({
+                    set({   
                         token:null
                     });
                     localStorage.removeItem("accessToken");
