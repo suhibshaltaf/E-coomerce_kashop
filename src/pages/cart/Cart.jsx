@@ -1,8 +1,10 @@
 import { Box, Button, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Typography } from '@mui/material';
 import useCart from '../../hooks/useCart';
 import Loader from '../../ui/Loader/Loader';
+import useRemoveFromCart from '../../hooks/useRemoveFromCart';
 export default function Cart() {
   const {data,isLoading,isError,error} = useCart();
+  const {mutate,isPending}=useRemoveFromCart();
 if(isLoading) return <Loader/>
 
 if(isError) return <Box color={'red'}>{error.message}</Box>
@@ -47,7 +49,7 @@ Actions
               {item.count*item.price  }
             </TableCell>
             <TableCell>
-              <Button color='error' variant='contained'>Remove</Button>
+              <Button color='error' variant='contained' disabled={isPending} onClick={()=>mutate(item.productId)}>Remove</Button>
             </TableCell>
           </TableRow>
         ))
