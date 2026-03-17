@@ -20,7 +20,7 @@ products</Typography>
 
 <Grid container  spacing={3}>
   {data.response.data.map(product=>
-  <Grid item  size={{ xs: 12, sm: 6, md: 4, lg: 3 }} >
+  <Grid item key={product.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }} >
     <Link to={`/products/${product.id}`}> <Card sx={{py:2 ,textAlign:'center' }} key={product.id}>
     <CardMedia component={'img'}
     src={product.image}>

@@ -18,7 +18,7 @@ Categories</Typography>
 
 <Grid container  spacing={3}>
   {data.response.data.map(category=>
-  <Grid item  size={{ xs: 12, sm: 6, md: 4, lg: 3 }} >
+  <Grid item key={category.id}  size={{ xs: 12, sm: 6, md: 4, lg: 3 }} >
   
     <Category category={category} />
 </Grid>

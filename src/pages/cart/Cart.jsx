@@ -1,10 +1,35 @@
-import { Box, Button, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Button, IconButton, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Typography } from '@mui/material';
 import useCart from '../../hooks/useCart';
 import Loader from '../../ui/Loader/Loader';
 import useRemoveFromCart from '../../hooks/useRemoveFromCart';
+import useUpdateCartItem from '../../hooks/useUpdateCartItem';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
+import { useNavigate } from 'react-router-dom';
+
 export default function Cart() {
   const {data,isLoading,isError,error} = useCart();
-  const {mutate,isPending}=useRemoveFromCart();
+  const navigate =useNavigate();
+
+  const {mutate:removeItem,isPending:isPendingRmove}=useRemoveFromCart();
+  const {mutate:updateItem,isPending:isPendingUpdate} =useUpdateCartItem();
+  const handleUpdateQty =(productId,action)=>{
+
+    const  item =data.items.find((i)=>{
+      return i.productId==productId;
+    });
+    if(action == '-'){
+      updateItem({productId,count:item.count-1})
+    }
+    else{
+            updateItem({productId,count:item.count+1})
+
+    }
+    console.log(item)
+
+
+
+  }
 if(isLoading) return <Loader/>
 
 if(isError) return <Box color={'red'}>{error.message}</Box>
@@ -24,7 +49,7 @@ product Name
 <TableCell>
 product Price 
         </TableCell><TableCell>
-product Quntity
+ Quntity
         </TableCell>
         <TableCell>
 Total Price
@@ -43,25 +68,44 @@ Actions
             </TableCell><TableCell>
               {item.price}
             </TableCell><TableCell>
-              {item.count}
+              <Box sx={{display: 'flex', alignItems:'center'}}>
+                <IconButton disabled={isPendingUpdate} onClick={()=>handleUpdateQty(item.productId,'-')}>
+                  <RemoveIcon/>
+                </IconButton>
+             
+              <Typography>              {item.count}
+</Typography>
+ <IconButton disabled={isPendingUpdate} onClick={()=>handleUpdateQty(item.productId,'+')}>
+                  <AddIcon/>
+                </IconButton> </Box>
             </TableCell>
             <TableCell>
               {item.count*item.price  }
             </TableCell>
             <TableCell>
-              <Button color='error' variant='contained' disabled={isPending} onClick={()=>mutate(item.productId)}>Remove</Button>
+              <Button color='error' variant='contained' disabled={isPendingRmove} onClick={()=>removeItem(item.productId)}>Remove</Button>
             </TableCell>
           </TableRow>
         ))
       }
     </TableBody>
-    <TableFooter>
-       <TableCell colSpan={5} sx={{fontWeight:800}}>
-             Total :  {data.cartTotal}$
-            </TableCell> 
-    </TableFooter>
+   <TableFooter>
+  <TableRow>
+    <TableCell colSpan={5} sx={{ fontWeight: 800 }}>
+      Total : {data.cartTotal}$
+    </TableCell>
+  </TableRow>
+</TableFooter>
   </Table>
 </TableContainer>
+<Box sx={{display:'flex',gap:3}}>
+  <Button variant='contained' color='success' sx={{flex:1}} onClick={()=>navigate('Checkout')} >
+    procces to checkout
+  </Button>
+   <Button variant='contained' sx={{flex:1}} onClick={()=>navigate('/')}>
+    countinue shopping
+  </Button>
+</Box>
 </Box>
    
   )
