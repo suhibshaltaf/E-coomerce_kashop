@@ -11,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { common } from '@mui/material/colors';
 import Loader from '../../../ui/Loader/Loader.jsx';
+import { useTranslation } from 'react-i18next';
 
 export default function Register() {
 
@@ -18,7 +19,7 @@ export default function Register() {
   const { register, handleSubmit, formState: { errors,isSubmitting } } = useForm({
     resolver: yupResolver(registerSchema),mode : `onBlur`
   });
-
+const {t}=useTranslation();  
   const registerform = async (values) => {
     try {
       const response = await axios.post(
@@ -161,7 +162,7 @@ color='white'          >
           </Button>
 
           <Typography variant="body" align="center">
-            Already have an account?<Link component={RouterLink} to="/login" color="inherit" style={{ cursor: 'pointer' }}> Log in</Link>
+            Already have an account?<Link component={RouterLink} to="/login" color="inherit" style={{ cursor: 'pointer' }}>{t('Login')}   </Link>
           </Typography>
 
         </Box>

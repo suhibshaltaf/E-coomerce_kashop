@@ -25,7 +25,6 @@ export default function Cart() {
             updateItem({productId,count:item.count+1})
 
     }
-    console.log(item)
 
 
 
@@ -33,7 +32,6 @@ export default function Cart() {
 if(isLoading) return <Loader/>
 
 if(isError) return <Box color={'red'}>{error.message}</Box>
-  console.log(data);
   return (
     
 <Box className='cart' sx={{py:5}} >

@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 export default function Products() {
     const {data,isLoading,isError,error} = useProducts();
-    console.log(data);
      
     if(isLoading) return <Loader/>
     

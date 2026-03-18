@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 
 
-const useAuthStore = create ((set)=>(
+const useAuthStore = create ( (set)=>(
     {
         token:localStorage.getItem("accessToken"),
         setToken:(newToken)=>{
@@ -10,8 +10,7 @@ const useAuthStore = create ((set)=>(
                 token:newToken
             });
             localStorage.setItem("accessToken",newToken);
-                }
-                ,
+                },
                 logout:()=>{
                     set({   
                         token:null

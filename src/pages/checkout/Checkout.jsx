@@ -6,7 +6,7 @@ import useChekout from '../../hooks/useChekout';
 
 export default function Checkout() {
       const {data,isLoading,isError,error} = useCart();
-      const [paymentmethod,setpaymentmethod]=useState('Cash');
+      const [PaymentMethod,setPaymentMethod]=useState('Cash');
       const {mutate:Checkout,isPending}=useChekout();
       if(isLoading) return <Loader/>
       
@@ -72,19 +72,19 @@ Actions
 
 <Box sx={{display:'flex',flexDirection:'column',gap:3,alignItems:'center'}}>
 <FormControl fullWidth>
-  <InputLabel id="paymentmethod">paymentmethod</InputLabel>
+  <InputLabel id="PaymentMethod">PaymentMethod</InputLabel>
   <Select
-    labelId="paymentmethod"
+    labelId="PaymentMethod"
     id="demo-simple-select"
-    value={paymentmethod}
+    value={PaymentMethod}
     label="paymentmethod"
-    onChange={(e)=>setpaymentmethod(e.target.value)}
+    onChange={(e)=>setPaymentMethod(e.target.value)}
   >
     <MenuItem value={'Cash'}>Cash</MenuItem>
     <MenuItem value={'Visa'}>Visa</MenuItem>
   </Select>
 </FormControl>
-<Button variant='contained' onClick={()=>Checkout(paymentmethod)}> pay now</Button>
+<Button variant='contained' onClick={()=>Checkout(PaymentMethod)}> pay now</Button>
 </Box>
 </Box>
 

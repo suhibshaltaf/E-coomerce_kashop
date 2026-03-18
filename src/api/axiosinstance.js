@@ -1,11 +1,15 @@
 import axios from "axios";
+import i18n from "../i18next";
 
 
 const axiosinstance = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}`,
-    headers: {
-        'Accept-Language': 'en'
-      }
-
+  baseURL: 'https://knowledgeshop.runasp.net/api',
+   
 });
+
+axiosinstance.interceptors.request.use( (config)=>{
+config.headers["Accept-Language"]=i18n.language
+return config;
+})
+
 export default axiosinstance;

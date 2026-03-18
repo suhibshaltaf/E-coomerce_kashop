@@ -31,7 +31,6 @@ export default function Login() {
       autoClose: 3000,
       rtl: true,
     });
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
