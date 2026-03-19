@@ -2,8 +2,8 @@ import { create } from "zustand";
 
 
 
-const useAuthStore = create ( (set)=>(
-    {
+const useAuthStore = create ( (set)=>({
+
         token:localStorage.getItem("accessToken"),
         setToken:(newToken)=>{
             set({

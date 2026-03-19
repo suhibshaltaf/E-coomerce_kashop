@@ -13,13 +13,19 @@ import { Badge, Icon, Link } from '@mui/material';
 import useAuthStore from '../../store/useAuthStore.js';
 import { useTranslation } from 'react-i18next';
 import i18n from '../../i18next.js';
+import useThemeStore from '../../store/useThemeStore.js';
 
 export default function Navbar() {
 const token =useAuthStore((state)=>state.token);
 const logout =useAuthStore((state)=>state.logout);
 
 const {t}=useTranslation();
+const mode=useThemeStore((state)=>state.mode);
+const toggleTheme=useThemeStore((state)=>state.toggleTheme);
+
+
 const navigate =useNavigate();
+
 const handleLogout = () => {
 logout();
 navigate('/login');
@@ -39,6 +45,10 @@ return (
       <Button  color="inherit"   onClick={changeLanguage}>
     {i18n.language ==="ar"?"en":"ar"}
   </Button>
+     <Button  color="inherit"   onClick={toggleTheme}>
+    {mode ==='ligth' ? 'dark' : 'ligth'}
+
+  </Button>
       <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 ,alignItems: 'center' }}>
         <Link component={RouterLink} to="/" color="inherit" underline='none'>{t('Home')}</Link>
         {
@@ -48,6 +58,7 @@ return (
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
+          <Link component={RouterLink} to="/profile" color="inherit" underline='none'> {t('Profile')}   </Link>
 
           <Link component={'button'} onClick={handleLogout} color="inherit" underline='none'> {t('logout')}   </Link>
         </>)

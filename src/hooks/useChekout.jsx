@@ -8,7 +8,7 @@ export default function useChekout() {
     mutationFn: async (paymentMethod) => {
        console.log("response paymentMethod ");
       console.log(paymentMethod);
-      return await authAxiosinstance.post("/Checkouts", {PaymentMethod : paymentMethod})
+      return await authAxiosinstance.post("Checkouts", {PaymentMethod : paymentMethod})
     },
     onSuccess: (response) => {
             console.log("response Checkouts ");
